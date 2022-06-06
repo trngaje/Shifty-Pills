@@ -4,17 +4,22 @@ ifeq ($(PLATFORM), gcw0)
   SYSROOT    := $(shell $(CC) -print-sysroot)
   CFLAGS     := --std=c89 --pedantic -Wall $(shell $(SYSROOT)/usr/bin/sdl-config --cflags) -DHOME_DIR -DNETWORKING
   LDFLAGS    := $(shell $(SYSROOT)/usr/bin/sdl-config --libs) -lm
-endif
-ifeq ($(PLATFORM), macos)
+else ifeq ($(PLATFORM), macos)
   CFLAGS     := $(shell sdl-config --cflags)
-endif
-ifeq ($(PLATFORM), mingw)
+else ifeq ($(PLATFORM), mingw)
   CC         := i686-w64-mingw32-gcc
   STRIP      := i686-w64-mingw32-strip
   SYSROOT    ?= /usr/i686-w64-mingw32
   CFLAGS     := --std=c89 --pedantic -Wall $(shell $(SYSROOT)/bin/sdl-config --cflags)
   LDFLAGS    := $(shell $(SYSROOT)/bin/sdl-config --libs) -lm
   TARGET     := shifty.exe
+else ifeq ($(PLATFORM), miyoomini)
+  CC         := arm-linux-gnueabihf-gcc
+  STRIP      := arm-linux-gnueabihf-strip
+  SYSROOT    := $(shell $(CC) -print-sysroot)
+  CFLAGS     := --std=c89 --pedantic -Wall $(shell $(SYSROOT)/usr/bin/sdl-config --cflags)  -DHOME_DIR -DNETWORKING -DMIYOOMINI
+  LDFLAGS    := $(shell $(SYSROOT)/usr/bin/sdl-config --libs) -lm
+  TARGET       ?= shifty
 endif
 
 SRCDIRS      = . backend

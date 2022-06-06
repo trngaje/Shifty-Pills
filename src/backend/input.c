@@ -39,11 +39,19 @@ void defaultKeymap(int **keyMap, int playerNum)
 			keyMap[KEY_DOWN] =			&keys[SDLK_DOWN];
 			keyMap[KEY_LEFT] =			&keys[SDLK_LEFT];
 			keyMap[KEY_RIGHT] =			&keys[SDLK_RIGHT];
+#ifdef MIYOOMINI
+			keyMap[KEY_ROTATE_LEFT] =	&keys[SDLK_LCTRL];
+			keyMap[KEY_ROTATE_RIGHT] =	&keys[SDLK_SPACE];
+			keyMap[KEY_DROP] =			&keys[SDLK_LSHIFT];
+			keyMap[KEY_OK] =			&keys[SDLK_RETURN]; /* start */
+			keyMap[KEY_BACK] =			&keys[SDLK_ESCAPE]; /* menu */
+#else			
 			keyMap[KEY_ROTATE_LEFT] =	&keys[SDLK_a];
 			keyMap[KEY_ROTATE_RIGHT] =	&keys[SDLK_s];
 			keyMap[KEY_DROP] =			&keys[SDLK_SPACE];
 			keyMap[KEY_OK] =			&keys[SDLK_LCTRL];
 			keyMap[KEY_BACK] =			&keys[SDLK_ESCAPE];
+#endif
 		break;
 		case 2:
 			keyMap[KEY_UP] =			&keys[SDLK_i];
